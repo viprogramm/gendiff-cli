@@ -1,16 +1,16 @@
 {
   "name": "project-lvl2-s70-vitaliyti",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Compares two configuration files and shows a difference",
   "main": "index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "babel-node": "babel-node",
     "eslint": "eslint",
-    "clean":"rm -r dist/*",
+    "clean": "rm -r dist/*",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublish": "npm run build"
   },
@@ -27,14 +27,16 @@
   "devDependencies": {
     "babel-cli": "*",
     "babel-core": "*",
+    "babel-eslint": "*",
     "babel-preset-env": "*",
     "babel-preset-stage-0": "*",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
-    "babel-eslint": "*"
+    "jest": "^19.0.2"
   },
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "lodash": "^4.17.4"
   }
 }
