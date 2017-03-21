@@ -3,6 +3,7 @@
 env:
   node: true
   es6: true
+  jest: true
 
 parser: babel-eslint
 
@@ -17,4 +18,4 @@ extends:
   - plugin:import/warnings
 
 rules:
-  no-console: 0  
+  no-console: 0
