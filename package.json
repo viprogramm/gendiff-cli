@@ -1,6 +1,6 @@
 {
   "name": "project-lvl2-s70-vitaliyti",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Compares two configuration files and shows a difference",
   "main": "dist/gendiff.js",
   "bin": {
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
+    "ini": "^1.3.4",
     "install": "^0.8.7",
     "js-yaml": "^3.8.2",
     "lodash": "^4.17.4",
