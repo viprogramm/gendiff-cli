@@ -1,8 +1,8 @@
-import genDiff from '../gendiff';
+import genDiff from '../src/gendiff';
 
 test('compare files', () => {
-  const path1 = `${__dirname}/__mocks__/before.json`;
-  const path2 = `${__dirname}/__mocks__/after.json`;
+  const path1 = `${__dirname}/__fixtures__/before.json`;
+  const path2 = `${__dirname}/__fixtures__/after.json`;
 
   const result = `{
     host: hexlet.io
