@@ -1,4 +1,6 @@
 import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
 import reduce from 'lodash/reduce';
 import difference from 'lodash/difference';
 
@@ -40,11 +42,26 @@ const render = (data) => {
   return `{${result}}`;
 };
 
-const genDiff = (path1, path2) => {
-  const data1 = JSON.parse(fs.readFileSync(path1));
-  const data2 = JSON.parse(fs.readFileSync(path2));
-  const parsedData = parse(data1, data2);
+const genDiff = (path1 = '', path2 = '') => {
+  let data1;
+  let data2;
 
+  const extname = path.extname(path1).toLowerCase();
+
+  switch (extname) {
+    case '.json':
+      data1 = JSON.parse(fs.readFileSync(path1, 'utf8'));
+      data2 = JSON.parse(fs.readFileSync(path2, 'utf8'));
+      break;
+    case '.yaml':
+      data1 = yaml.safeLoad(fs.readFileSync(path1, 'utf8'));
+      data2 = yaml.safeLoad(fs.readFileSync(path2, 'utf8'));
+      break;
+    default:
+      throw new Error('Wrong file format');
+  }
+
+  const parsedData = parse(data1, data2);
   return render(parsedData);
 };
 
