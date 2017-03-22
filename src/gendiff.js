@@ -1,11 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import yaml from 'js-yaml';
-import ini from 'ini';
 import reduce from 'lodash/reduce';
 import difference from 'lodash/difference';
+import getParser from './parsers';
 
-const parse = (data1 = {}, data2 = {}) => {
+const compare = (data1 = {}, data2 = {}) => {
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
 
@@ -43,34 +42,31 @@ const render = (data) => {
   return `{${result}}`;
 };
 
-const getDataByPath = (filePath) => {
+const getFileFormatByPath = (filePath) => {
   const extname = path.extname(filePath).toLowerCase();
-
-  switch (extname) {
-    case '.json':
-      return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    case '.yaml':
-      return yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
-    case '.ini':
-      return ini.parse(fs.readFileSync(filePath, 'utf8'));
-    default:
-      throw new Error('Wrong file format');
-  }
+  return extname.length > 1 ? extname.substr(1).toLowerCase() : extname;
 };
 
-const isSameExtname = (path1, path2) =>
-  path.extname(path1).toLowerCase() === path.extname(path2).toLowerCase();
+const getDataByPath = (filePath) => {
+  const fileData = fs.readFileSync(filePath, 'utf8');
+  const format = getFileFormatByPath(filePath);
+  const parser = getParser(format);
+  return parser(fileData);
+};
 
-const genDiff = (path1 = '', path2 = '') => {
-  if (!isSameExtname(path1, path2)) {
+const isSameFormat = (path1, path2) =>
+  getFileFormatByPath(path1) === getFileFormatByPath(path2);
+
+const genDiff = (path1, path2) => {
+  if (!isSameFormat(path1, path2)) {
     throw new Error('Couldn\'t compare files with different file formats');
   }
 
   const data1 = getDataByPath(path1);
   const data2 = getDataByPath(path2);
 
-  const parsedData = parse(data1, data2);
-  return render(parsedData);
+  const comparedData = compare(data1, data2);
+  return render(comparedData);
 };
 
 export default genDiff;
