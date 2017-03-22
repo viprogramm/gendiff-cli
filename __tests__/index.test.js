@@ -1,4 +1,4 @@
-import genDiff from '../src/gendiff';
+import genDiff from '../src';
 
 test('compare JSON files', () => {
   const path1 = `${__dirname}/__fixtures__/before.json`;
