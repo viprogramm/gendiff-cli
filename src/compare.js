@@ -1,57 +1,6 @@
 import difference from 'lodash/difference';
 import union from 'lodash/union';
-
-const defaultIndentLength = 4;
-
-const statuses = {
-  not_changed: 0,
-  changed: 1,
-  added: 2,
-  removed: 3,
-};
-
-const defaultStrStatus = '    ';
-const plusStrStatus = '  + ';
-const minusStrStatus = '  - ';
-
-const generateIndent = (count = 0) => ' '.repeat(count);
-
-const getStrStatus = (status) => {
-  if (status === statuses.added) {
-    return plusStrStatus;
-  } else if (status === statuses.removed) {
-    return minusStrStatus;
-  }
-  return defaultStrStatus;
-};
-
-const render = (comparedData) => {
-  const renderAst = (data, spaceCount = 0) => {
-    const indent = generateIndent(spaceCount);
-
-    const iter = (item) => {
-      const { type, name, status, children } = item;
-      const strStatus = getStrStatus(status);
-
-      if (type === 'list') {
-        return `${indent}${strStatus}${name}: {\n${renderAst(children, spaceCount + defaultIndentLength)}    ${indent}}\n`;
-      }
-
-      const [before, after] = children;
-
-      if (status === statuses.changed) {
-        return `${indent}${plusStrStatus}${name}: ${after}\n${indent}${minusStrStatus}${name}: ${before}\n`;
-      }
-
-      const value = before !== undefined ? before : after;
-      return `${indent}${strStatus}${name}: ${value}\n`;
-    };
-
-    return data.map(iter).join('');
-  };
-
-  return `{\n${renderAst(comparedData)}}`;
-};
+import statuses from './constants/statuses';
 
 const getStatus = (before, after, key) => {
   const beforeKeys = Object.keys(before);
@@ -98,7 +47,5 @@ const compare = (before = {}, after = {}, setStatus = true) => {
   });
 };
 
-export default (before, after) => {
-  const comparedData = compare(before, after);
-  return render(comparedData);
-};
+export default compare;
+

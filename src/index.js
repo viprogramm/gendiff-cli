@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import getParser from './parsers';
 import compare from './compare';
+import render from './output-formats';
 
 const getFileFormatByPath = (filePath) => {
   const extname = path.extname(filePath).toLowerCase();
@@ -17,7 +18,7 @@ const getDataByPath = (filePath) => {
 const isSameFormat = (path1, path2) =>
 getFileFormatByPath(path1) === getFileFormatByPath(path2);
 
-const genDiff = (pathBefore, pathAfter) => {
+const genDiff = (pathBefore, pathAfter, outputFormat) => {
   if (!isSameFormat(pathBefore, pathAfter)) {
     throw new Error('Couldn\'t compare files with different file formats');
   }
@@ -25,7 +26,8 @@ const genDiff = (pathBefore, pathAfter) => {
   const before = getDataByPath(pathBefore);
   const after = getDataByPath(pathAfter);
 
-  return compare(before, after);
+  const comparedData = compare(before, after);
+  return render(outputFormat)(comparedData);
 };
 
 export default genDiff;
