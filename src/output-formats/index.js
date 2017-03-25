@@ -1,4 +1,4 @@
-import json from './json';
+import text from './text';
 import plain from './plain';
 
 export default (outputFormat) => {
@@ -6,6 +6,6 @@ export default (outputFormat) => {
     case 'plain':
       return plain;
     default:
-      return json;
+      return text;
   }
 };
