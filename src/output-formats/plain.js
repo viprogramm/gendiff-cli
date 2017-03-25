@@ -3,7 +3,7 @@ import statuses from '../constants/statuses';
 const render = (comparedData) => {
   const renderAst = (data) => {
     const iter = (item) => {
-      const { type, name, status, children } = item;
+      const { type, name, status, children, before, after } = item;
 
       if (type === 'list') {
         if (status === statuses.removed) {
@@ -13,8 +13,6 @@ const render = (comparedData) => {
         }
         return renderAst(children);
       }
-
-      const [before, after] = children;
 
       if (status === statuses.removed) {
         return `Property '${name}' was removed\n`;

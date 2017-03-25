@@ -31,18 +31,27 @@ const compare = (before = {}, after = {}, setStatus = true) => {
         status !== statuses.added && status !== statuses.removed;
 
       return {
-        type: 'list',
         name: key,
+        type: 'list',
         status,
         children: compare(before[key], after[key], childrenSetStatus),
       };
     }
 
-    return {
-      type: 'item',
+    const item = {
       name: key,
+      type: 'item',
+      before: before[key],
+      after: after[key],
+    };
+
+    if (status === null) {
+      return item;
+    }
+
+    return {
+      ...item,
       status,
-      children: [before[key], after[key]],
     };
   });
 };

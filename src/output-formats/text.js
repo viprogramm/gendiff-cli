@@ -22,14 +22,12 @@ const render = (comparedData) => {
     const indent = generateIndent(spaceCount);
 
     const iter = (item) => {
-      const { type, name, status, children } = item;
+      const { type, name, status, children, before, after } = item;
       const strStatus = getStrStatus(status);
 
       if (type === 'list') {
         return `${indent}${strStatus}${name}: {\n${renderAst(children, spaceCount + defaultIndentLength)}    ${indent}}\n`;
       }
-
-      const [before, after] = children;
 
       if (status === statuses.changed) {
         return `${indent}${plusStrStatus}${name}: ${after}\n${indent}${minusStrStatus}${name}: ${before}\n`;

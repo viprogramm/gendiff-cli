@@ -3,7 +3,7 @@ import genDiff from '../src';
 const fixturesFolder = `${__dirname}/__fixtures__`;
 
 describe('files with simple structure', () => {
-  const resultJSON = `{
+  const resultText = `{
     host: hexlet.io
   + timeout: 20
   - timeout: 50
@@ -20,7 +20,7 @@ Property 'verbose' was added with value: true
     const path1 = `${fixturesFolder}/before.json`;
     const path2 = `${fixturesFolder}/after.json`;
 
-    expect(genDiff(path1, path2)).toEqual(resultJSON);
+    expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
   });
 
@@ -28,7 +28,7 @@ Property 'verbose' was added with value: true
     const path1 = `${fixturesFolder}/before.yaml`;
     const path2 = `${fixturesFolder}/after.yaml`;
 
-    expect(genDiff(path1, path2)).toEqual(resultJSON);
+    expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
   });
 
@@ -36,13 +36,13 @@ Property 'verbose' was added with value: true
     const path1 = `${fixturesFolder}/before.ini`;
     const path2 = `${fixturesFolder}/after.ini`;
 
-    expect(genDiff(path1, path2)).toEqual(resultJSON);
+    expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
   });
 });
 
 describe('files with nested structure', () => {
-  const resultJSON = `{
+  const resultText = `{
     common: {
         setting1: Value 1
       - setting2: 200
@@ -81,7 +81,7 @@ Property 'group3' was added with complex value
     const path1 = `${fixturesFolder}/before-nested.json`;
     const path2 = `${fixturesFolder}/after-nested.json`;
 
-    expect(genDiff(path1, path2)).toEqual(resultJSON);
+    expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
   });
 
@@ -89,7 +89,7 @@ Property 'group3' was added with complex value
     const path1 = `${fixturesFolder}/before-nested.yaml`;
     const path2 = `${fixturesFolder}/after-nested.yaml`;
 
-    expect(genDiff(path1, path2)).toEqual(resultJSON);
+    expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
   });
 
@@ -98,7 +98,7 @@ Property 'group3' was added with complex value
     const path1 = `${fixturesFolder}/before-nested.ini`;
     const path2 = `${fixturesFolder}/after-nested.ini`;
 
-    const resultJsonINI = `{
+    const resultTextINI = `{
     common: {
         setting1: Value 1
       - setting2: 200
@@ -124,8 +124,7 @@ Property 'group2' was removed
 Property 'group3' was added with complex value
 `;
 
-    expect(genDiff(path1, path2)).toEqual(resultJsonINI);
+    expect(genDiff(path1, path2)).toEqual(resultTextINI);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlainINI);
   });
 });
-
