@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import getParser from './parsers';
-import compareBuilder from './compareBuilder';
+import compare from './compare';
 
 const getFileFormatByPath = (filePath) => {
   const extname = path.extname(filePath).toLowerCase();
@@ -25,7 +25,7 @@ const genDiff = (pathBefore, pathAfter) => {
   const before = getDataByPath(pathBefore);
   const after = getDataByPath(pathAfter);
 
-  return compareBuilder.build(before, after);
+  return compare(before, after);
 };
 
 export default genDiff;
