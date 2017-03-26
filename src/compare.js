@@ -1,6 +1,6 @@
 import difference from 'lodash/difference';
 import union from 'lodash/union';
-import statuses from './constants/statuses';
+import statuses from './constants';
 
 const getStatus = (before, after, key) => {
   const beforeKeys = Object.keys(before);

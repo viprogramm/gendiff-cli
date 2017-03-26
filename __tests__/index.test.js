@@ -1,3 +1,4 @@
+import fs from 'fs';
 import genDiff from '../src';
 
 const fixturesFolder = `${__dirname}/__fixtures__`;
@@ -16,12 +17,15 @@ Property 'proxy' was removed
 Property 'verbose' was added with value: true
 `;
 
+  const resultJSON = JSON.stringify(JSON.parse(fs.readFileSync(`${fixturesFolder}/result.json`, 'utf8')));
+
   test('compare JSON files', () => {
     const path1 = `${fixturesFolder}/before.json`;
     const path2 = `${fixturesFolder}/after.json`;
 
     expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
+    expect(genDiff(path1, path2, 'json')).toEqual(resultJSON);
   });
 
   test('compare YAML files', () => {
@@ -30,6 +34,7 @@ Property 'verbose' was added with value: true
 
     expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
+    expect(genDiff(path1, path2, 'json')).toEqual(resultJSON);
   });
 
   test('compare INI files', () => {
@@ -77,12 +82,15 @@ Property 'group2' was removed
 Property 'group3' was added with complex value
 `;
 
+  const resultJSON = JSON.stringify(JSON.parse(fs.readFileSync(`${fixturesFolder}/result-nested.json`, 'utf8')));
+
   test('compare JSON files', () => {
     const path1 = `${fixturesFolder}/before-nested.json`;
     const path2 = `${fixturesFolder}/after-nested.json`;
 
     expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
+    expect(genDiff(path1, path2, 'json')).toEqual(resultJSON);
   });
 
   test('compare YAML files', () => {
@@ -91,6 +99,7 @@ Property 'group3' was added with complex value
 
     expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
+    expect(genDiff(path1, path2, 'json')).toEqual(resultJSON);
   });
 
 

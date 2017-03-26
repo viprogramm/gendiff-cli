@@ -1,0 +1,28 @@
+[
+  {
+    "name":"host",
+    "type":"item",
+    "before":"hexlet.io",
+    "after":"hexlet.io",
+    "status":"not_changed"
+  },
+  {
+    "name":"timeout",
+    "type":"item",
+    "before": 50,
+    "after": 20,
+    "status":"changed"
+  },
+  {
+    "name":"proxy",
+    "type":"item",
+    "before":"123.234.53.22",
+    "status":"removed"
+  },
+  {
+    "name":"verbose",
+    "type":"item",
+    "after":true,
+    "status":"added"
+  }
+]

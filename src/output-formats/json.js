@@ -1,3 +1,1 @@
-const render = data => JSON.stringify(data);
-
-export default render;
+export default data => JSON.stringify(data);

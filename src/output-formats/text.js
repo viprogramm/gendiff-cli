@@ -1,4 +1,4 @@
-import statuses from '../constants/statuses';
+import statuses from '../constants';
 
 const defaultIndentLength = 4;
 
