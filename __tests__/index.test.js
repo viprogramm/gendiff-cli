@@ -43,6 +43,7 @@ Property 'verbose' was added with value: true
 
     expect(genDiff(path1, path2)).toEqual(resultText);
     expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
+    expect(genDiff(path1, path2, 'json')).toEqual(resultJSON);
   });
 });
 
@@ -107,33 +108,8 @@ Property 'group3' was added with complex value
     const path1 = `${fixturesFolder}/before-nested.ini`;
     const path2 = `${fixturesFolder}/after-nested.ini`;
 
-    const resultTextINI = `{
-    common: {
-        setting1: Value 1
-      - setting2: 200
-        setting3: true
-      + setting4: blah blah
-    }
-    group1: {
-      + baz: bars
-      - baz: bas
-        foo: bar
-    }
-  - group2: {
-        abc: 12345
-    }
-  + group3: {
-        fee: 100500
-    }
-}`;
-    const resultPlainINI = `Property 'setting2' was removed
-Property 'setting4' was added with value: blah blah
-Property 'baz' was updated. From 'bas' to 'bars'
-Property 'group2' was removed
-Property 'group3' was added with complex value
-`;
-
-    expect(genDiff(path1, path2)).toEqual(resultTextINI);
-    expect(genDiff(path1, path2, 'plain')).toEqual(resultPlainINI);
+    expect(genDiff(path1, path2)).toEqual(resultText);
+    expect(genDiff(path1, path2, 'plain')).toEqual(resultPlain);
+    expect(genDiff(path1, path2, 'json')).toEqual(resultJSON);
   });
 });

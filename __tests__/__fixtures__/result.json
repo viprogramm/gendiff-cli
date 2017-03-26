@@ -9,8 +9,8 @@
   {
     "name":"timeout",
     "type":"item",
-    "before": 50,
-    "after": 20,
+    "before": "50",
+    "after": "20",
     "status":"changed"
   },
   {
