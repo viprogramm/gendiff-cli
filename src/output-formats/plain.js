@@ -1,24 +1,24 @@
-import statuses from '../constants';
+import types from '../constants';
 
 const render = (comparedData) => {
   const renderAst = (data) => {
     const iter = (item) => {
-      const { type, name, status, children, before, after } = item;
+      const { type, name, children, before, after } = item;
 
-      if (type === 'list') {
-        if (status === statuses.removed) {
+      if (children !== undefined) {
+        if (type === types.removed) {
           return `Property '${name}' was removed\n`;
-        } else if (status === statuses.added) {
+        } else if (type === types.added) {
           return `Property '${name}' was added with complex value\n`;
         }
         return renderAst(children);
       }
 
-      if (status === statuses.removed) {
+      if (type === types.removed) {
         return `Property '${name}' was removed\n`;
-      } else if (status === statuses.added) {
+      } else if (type === types.added) {
         return `Property '${name}' was added with value: ${after}\n`;
-      } else if (status === statuses.changed) {
+      } else if (type === types.changed) {
         return `Property '${name}' was updated. From '${before}' to '${after}'\n`;
       }
 

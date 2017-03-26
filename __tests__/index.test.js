@@ -17,7 +17,7 @@ Property 'proxy' was removed
 Property 'verbose' was added with value: true
 `;
 
-  const resultJSON = JSON.stringify(JSON.parse(fs.readFileSync(`${fixturesFolder}/result.json`, 'utf8')));
+  const resultJSON = fs.readFileSync(`${fixturesFolder}/result.json`, 'utf8');
 
   test('compare JSON files', () => {
     const path1 = `${fixturesFolder}/before.json`;
@@ -83,7 +83,7 @@ Property 'group2' was removed
 Property 'group3' was added with complex value
 `;
 
-  const resultJSON = JSON.stringify(JSON.parse(fs.readFileSync(`${fixturesFolder}/result-nested.json`, 'utf8')));
+  const resultJSON = fs.readFileSync(`${fixturesFolder}/result-nested.json`, 'utf8');
 
   test('compare JSON files', () => {
     const path1 = `${fixturesFolder}/before-nested.json`;

@@ -9,7 +9,7 @@ const getStatus = (before, after, key) => {
   const addedKeys = difference(afterKeys, beforeKeys);
 
   if (before[key] === after[key]) {
-    return statuses.not_changed;
+    return statuses.unchanged;
   } else if (addedKeys.includes(key)) {
     return statuses.added;
   } else if (removedKeys.includes(key)) {
@@ -18,40 +18,27 @@ const getStatus = (before, after, key) => {
   return statuses.changed;
 };
 
-const compare = (before = {}, after = {}, setStatus = true) => {
+const compare = (before = {}, after = {}) => {
   const beforeKeys = Object.keys(before);
   const afterKeys = Object.keys(after);
   const allKeys = union(beforeKeys, afterKeys);
 
   return allKeys.map((key) => {
-    const status = setStatus ? getStatus(before, after, key) : null;
+    const status = getStatus(before, after, key);
 
     if (before[key] instanceof Object || after[key] instanceof Object) {
-      const childrenSetStatus = setStatus &&
-        status !== statuses.added && status !== statuses.removed;
-
       return {
         name: key,
-        type: 'list',
-        status,
-        children: compare(before[key], after[key], childrenSetStatus),
+        type: status,
+        children: compare(before[key], after[key]),
       };
     }
 
-    const item = {
+    return {
       name: key,
-      type: 'item',
+      type: status,
       before: before[key],
       after: after[key],
-    };
-
-    if (status === null) {
-      return item;
-    }
-
-    return {
-      ...item,
-      status,
     };
   });
 };

@@ -1,28 +1,13 @@
-[
-  {
-    "name":"host",
-    "type":"item",
-    "before":"hexlet.io",
-    "after":"hexlet.io",
-    "status":"not_changed"
-  },
-  {
-    "name":"timeout",
-    "type":"item",
+{
+  "host": "hexlet.io",
+  "timeout": {
     "before": "50",
-    "after": "20",
-    "status":"changed"
+    "after": "20"
   },
-  {
-    "name":"proxy",
-    "type":"item",
-    "before":"123.234.53.22",
-    "status":"removed"
+  "proxy": {
+    "before": "123.234.53.22"
   },
-  {
-    "name":"verbose",
-    "type":"item",
-    "after":true,
-    "status":"added"
+  "verbose": {
+    "after": true
   }
-]
+}

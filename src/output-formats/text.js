@@ -1,4 +1,4 @@
-import statuses from '../constants';
+import types from '../constants';
 
 const defaultIndentLength = 4;
 
@@ -9,32 +9,32 @@ const minusStrStatus = '  - ';
 const generateIndent = (count = 0) => ' '.repeat(count);
 
 const getStrStatus = (status) => {
-  if (status === statuses.added) {
+  if (status === types.added) {
     return plusStrStatus;
-  } else if (status === statuses.removed) {
+  } else if (status === types.removed) {
     return minusStrStatus;
   }
   return defaultStrStatus;
 };
 
 const render = (comparedData) => {
-  const renderAst = (data, spaceCount = 0) => {
+  const renderAst = (data, spaceCount = 0, showStatus = true) => {
     const indent = generateIndent(spaceCount);
 
     const iter = (item) => {
-      const { type, name, status, children, before, after } = item;
-      const strStatus = getStrStatus(status);
+      const { type, name, children, before, after } = item;
+      const strStatus = getStrStatus(type);
 
-      if (type === 'list') {
-        return `${indent}${strStatus}${name}: {\n${renderAst(children, spaceCount + defaultIndentLength)}    ${indent}}\n`;
+      if (children !== undefined) {
+        return `${indent}${strStatus}${name}: {\n${renderAst(children, spaceCount + defaultIndentLength, showStatus && (type === types.changed || type === types.unchanged))}    ${indent}}\n`;
       }
 
-      if (status === statuses.changed) {
+      if (type === types.changed) {
         return `${indent}${plusStrStatus}${name}: ${after}\n${indent}${minusStrStatus}${name}: ${before}\n`;
       }
 
       const value = before !== undefined ? before : after;
-      return `${indent}${strStatus}${name}: ${value}\n`;
+      return `${indent}${showStatus ? strStatus : defaultStrStatus}${name}: ${value}\n`;
     };
 
     return data.map(iter).join('');

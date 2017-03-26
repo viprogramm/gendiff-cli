@@ -1,5 +1,5 @@
 const statuses = {
-  not_changed: 'not_changed',
+  unchanged: 'unchanged',
   changed: 'changed',
   added: 'added',
   removed: 'removed',
