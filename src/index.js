@@ -1,3 +1,5 @@
+// @flow
+
 import fs from 'fs';
 import path from 'path';
 import getParser from './parsers';
@@ -18,7 +20,7 @@ const getDataByPath = (filePath) => {
 const isSameFormat = (path1, path2) =>
 getFileFormatByPath(path1) === getFileFormatByPath(path2);
 
-const genDiff = (pathBefore, pathAfter, outputFormat) => {
+const genDiff = (pathBefore: string, pathAfter: string, outputFormat: string) => {
   if (!isSameFormat(pathBefore, pathAfter)) {
     throw new Error('Couldn\'t compare files with different file formats');
   }

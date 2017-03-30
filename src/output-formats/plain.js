@@ -1,6 +1,8 @@
+// @flow
+
 import types from '../constants';
 
-const render = (comparedData) => {
+const render = (comparedData: Object) => {
   const renderAst = (data) => {
     const iter = (item) => {
       const { type, name, children, before, after } = item;

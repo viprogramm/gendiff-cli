@@ -11,7 +11,8 @@
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -24,14 +25,16 @@
   },
   "homepage": "https://github.com/viprogramm/project-lvl2-s70#readme",
   "devDependencies": {
-    "babel-cli": "*",
+    "babel-cli": "^6.24.0",
     "babel-core": "*",
     "babel-eslint": "*",
     "babel-preset-env": "*",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "*",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
+    "flow-bin": "^0.42.0",
     "jest": "^19.0.2"
   },
   "dependencies": {

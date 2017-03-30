@@ -1,3 +1,5 @@
+// @flow
+
 const statuses = {
   unchanged: 'unchanged',
   changed: 'changed',

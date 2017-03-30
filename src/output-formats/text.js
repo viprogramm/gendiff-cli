@@ -1,3 +1,5 @@
+// @flow
+
 import types from '../constants';
 
 const defaultIndentLength = 4;
@@ -17,7 +19,7 @@ const getStrStatus = (status) => {
   return defaultStrStatus;
 };
 
-const render = (comparedData) => {
+const render = (comparedData: Object) => {
   const renderAst = (data, spaceCount = 0, showStatus = true) => {
     const indent = generateIndent(spaceCount);
 

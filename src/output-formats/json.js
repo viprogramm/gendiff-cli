@@ -1,3 +1,5 @@
+// @flow
+
 import types from '../constants';
 
 const toJson = ast => ast.reduce((acc, item) => {
@@ -24,4 +26,4 @@ const toJson = ast => ast.reduce((acc, item) => {
   return { ...acc, ...getNode(item) };
 }, {});
 
-export default comparedData => JSON.stringify(toJson(comparedData), null, 2);
+export default (comparedData: Object) => JSON.stringify(toJson(comparedData), null, 2);

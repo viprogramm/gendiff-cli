@@ -1,1 +1,3 @@
-export default data => JSON.parse(data);
+// @flow
+
+export default (data: string) => JSON.parse(data);

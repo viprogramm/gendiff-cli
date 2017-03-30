@@ -14,5 +14,8 @@ build:
 lint:
 	npm run eslint -- src
 
+flow:
+	npm run flow
+
 test:
 	npm test

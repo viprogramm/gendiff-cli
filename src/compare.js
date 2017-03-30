@@ -1,3 +1,5 @@
+// @flow
+
 import difference from 'lodash/difference';
 import union from 'lodash/union';
 import statuses from './constants';
@@ -18,7 +20,7 @@ const getStatus = (before, after, key) => {
   return statuses.changed;
 };
 
-const compare = (before = {}, after = {}) => {
+const compare = (before: Object = {}, after: Object = {}) => {
   const beforeKeys = Object.keys(before);
   const afterKeys = Object.keys(after);
   const allKeys = union(beforeKeys, afterKeys);
@@ -44,4 +46,3 @@ const compare = (before = {}, after = {}) => {
 };
 
 export default compare;
-

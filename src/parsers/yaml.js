@@ -1,3 +1,5 @@
+// @flow
+
 import yaml from 'js-yaml';
 
-export default data => yaml.safeLoad(data);
+export default (data: Object) => yaml.safeLoad(data);
